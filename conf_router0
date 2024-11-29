@@ -1,0 +1,25 @@
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface GigabitEthernet0/0
+Router(config-if)#ip add 192.168.1.1 255.255.255.0
+Router(config-if)#no sh
+
+Router(config)#interface Serial0/0/0
+Router(config-if)#ip add 10.0.0.1 255.0.0.0
+Router(config-if)#no sh
+
+Router#conf
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip route 192.168.2.0 255.255.0.0 10.0.0.2
+%Inconsistent address and mask
+Router(config)#exit
+Router#
+
+Router(config)#access-list 50 deny 192.168.2.3
+Router(config)#access-list 50 permit any
+Router(config)#int s0/0/0
+Router(config-if)#ip access-group 50 in
+Router(config-if)#exit
